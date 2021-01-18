@@ -47,7 +47,12 @@
             return $this-> name;
           }
           public function setName($name) {
-            $this-> name = $name;
+
+            if (gettype($name) == 'string') {
+              $this-> name = $name;
+            } else {
+              $this-> name = 'this should be a string not a number or something else';
+            }
           }
 
           //get set lastname
