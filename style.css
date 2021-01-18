@@ -1,0 +1,16 @@
+body {
+  background-color: darkgreen;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: auto;
+  flex-direction: column;
+  flex-wrap: wrap;
+
+}
+
+.container {
+  font-size: 15px;
+}
