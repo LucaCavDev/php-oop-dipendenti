@@ -123,17 +123,20 @@
         }
 
         class Boss extends Dipendente {
-          // bonus struttura
+          // bonus struttura dipendenti
           private $bonus;
           private $struttura;
+          private $dipendenti;
 
           public function __construct($name, $lastname, $dateOfBirth, $education, $salary,
-                                      $bonus, $struttura) {
+                                      $bonus, $struttura, $employees = []) {
 
             parent::__construct($name, $lastname, $dateOfBirth, $education, $salary);
 
             $this-> setBonus($bonus);
             $this-> setStruttura($struttura);
+            $this-> setEmployees($employees);
+
           }
 
           //get set bonus
@@ -152,11 +155,31 @@
             $this-> struttura = $struttura;
           }
 
+          //get set dipendenti
+          public function getEmployees() {
+            return $this -> employees;
+          }
+          public function setEmployees($employees) {
+            $this -> employees = $employees;
+          }
+
           public function __toString() {
 
             return parent::__toString() . '<br>'
             . 'bonus: ' . $this-> getBonus() . '<br>'
-            . 'struttura: ' . $this-> getStruttura();
+            . 'struttura: ' . $this-> getStruttura() . '<br>'
+            . 'employees:<br>' . $this -> getEmpsStr() . '<br>';
+
+          }
+
+          private function getEmpsStr() {
+            $str = '';
+            for ($x=0;$x<count($this -> getEmployees());$x++) {
+              $emp = $this -> getEmployees()[$x];
+              $fullname = $emp -> getName() . ' ' . $emp -> getLastname();
+              $str .= ($x + 1) . ': ' . $fullname . '<br>';
+            }
+            return $str;
           }
 
 
@@ -165,14 +188,36 @@
 
 
 
-        $persona = new Persona('nome', 'cognome', 'dataDiNascita');
-        $dipendente = new Dipendente('nome', 'cognome', 'dataDiNascita', 'livelloScolastico', 'stipendio');
-        $boss = new Boss('nome', 'cognome', 'dataDiNascita', 'livelloScolastico', 'stipendio', 'bonus', 'struttura');
+        $persona = new Persona(
+          '(p)nome',
+          '(p)cognome',
+          '(p)dataDiNascita'
+        );
+        $dipendente1 = new Dipendente(
+          '(d)nome',
+          '(d)cognome',
+          '(d)dataDiNascita',
+          '(d)livelloScolastico',
+          '(d)stipendio'
+        );
+        $boss = new Boss(
+          '(b)nome',
+          '(b)(b)cognome',
+          '(b)dataDiNascita',
+          '(b)livelloScolastico',
+          '(b)stipendio',
+          '(b)bonus',
+          '(b)struttura',
+          [
+            $dipendente1,
+            $dipendente1,
+            $dipendente1,
+          ]
+        );
 
         echo 'persona:<br>' . $persona . '<br><br>'
           . 'dipendente:<br>' . $dipendente . '<br><br>'
-          . 'boss:<br>' . $boss;
-
+          . 'boss:<br>' . $boss. '<br><br>';
 
       ?>
     </h2>
