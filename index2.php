@@ -176,6 +176,9 @@
             return $this -> employees;
           }
           public function setEmployees($employees) {
+            if (empty($employees)) {
+              throw new BossEmpCheck;
+            }
             $this -> employees = $employees;
           }
           public function __toString() {
@@ -250,6 +253,9 @@
         class NameCheck extends Exception {};
         class LastnameCheck extends Exception {};
         // class RalCheck extends Exception {};
+        class BossEmpCheck extends Exception {};
+
+
 
 
 
@@ -257,8 +263,8 @@
 
         try {
           $personCheck = new Person(
-            'woee',
-            'Cq',
+            'wrewerwe',
+            'Csssssse',
             '12-01-1999',
             3
           );
@@ -293,6 +299,32 @@
         //     . 'Ral needs to be between 10.000 and 100.000';
         // }
 
+
+        try {
+
+          $bossCheck = new Boss(
+            'Donald',
+            'Trump',
+            '(b)dateOfBirth',
+            8,
+            50000,
+            'president',
+            '(b)idCode',
+            'something-something-2016',
+            '(b)profit',
+            '(b)vacancy',
+            '(b)sector',
+            [
+              $e1,
+              $e1
+
+            ]
+          );
+          echo 'prova array boss:<br>' . $bossCheck;
+
+        } catch (BossEmpCheck $e) {
+            echo 'prova array boss:<br>' . 'Non ci sono dipendenti, capo de chè?!';
+        }
 
       ?>
     </h4>
