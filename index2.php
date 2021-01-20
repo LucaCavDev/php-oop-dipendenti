@@ -13,7 +13,7 @@
 
   <!--
   GOAL: sulla base dell'esercizio di ieri (vedi correzione qui su slack) aggiungere i seguenti vincoli di integrita':
-  done- nomi e cognomi devono essere di >3 caratteri
+  - nomi e cognomi devono essere di >3 caratteri
   - i livelli di sicurezza devono essere [1;5] per i dipendenti e [6;10] per i boss
   - ral employee [10.000;100.000]
   - non puo' esistere boss senza dipendenti
@@ -76,6 +76,10 @@
             return $this -> securyLvl;
           }
           public function setSecuryLvl($securyLvl) {
+            if ($securyLvl != 0) {
+              throw new PersonSecLvl;
+            }
+
             $this -> securyLvl = $securyLvl;
           }
 
@@ -102,11 +106,23 @@
             $this -> setIdCode($idCode);
             $this -> setDateOfHiring($dateOfHiring);
           }
+
+          public function getSecuryLvl() {
+            return $this -> securyLvl;
+          }
+          public function setSecuryLvl($securyLvl) {
+            if ($securyLvl < 1 || $securyLvl > 5) {
+              $throw = new EmployeeSecLvl;
+            }
+
+            $this -> securyLvl = $securyLvl;
+          }
+
           public function getRal() {
             return $this -> $ral;
           }
           public function setRal($ral) {
-            if ($ral <= 10000 || $ral >= 100000) {
+            if ($ral < 10000 || $ral > 100000) {
               throw new RalCheck;
             }
 
@@ -154,6 +170,18 @@
             $this -> setSector($sector);
             $this -> setEmployees($employees);
           }
+
+          public function getSecuryLvl() {
+            return $this -> securyLvl;
+          }
+
+          public function setSecuryLvl($securyLvl) {
+            if ($securyLvl < 6 || $securyLvl > 10) {
+              $throw = new BossSecLvl;
+            }
+            $this -> securyLvl = $securyLvl;
+          }
+
           public function getProfit() {
             return $this -> profit;
           }
@@ -253,15 +281,22 @@
         class NameCheck extends Exception {};
         class LastnameCheck extends Exception {};
         class RalCheck extends Exception {};
+        class PersonSecLvl extends Exception {};
+        class EmployeeSecLvl extends Exception {};
+        class BossSecLvl extends Exception {};
         class BossEmpCheck extends Exception {};
 
+      ?>
+    </h4>
 
+    <div class="person">
+      <?php
         try {
           $personCheck = new Person(
-            'wrewerwe',
+            'wsdasdsa',
             'Csssssse',
             '12-01-1999',
-            3
+            0
           );
           echo 'Prova lunghezza lettere per nome e cognome in un esempio di class Person :<br>'
             . $personCheck . '<br><br>';
@@ -274,33 +309,56 @@
           echo 'Prova lunghezza lettere nome cognome in un esempio di class Person :<br>'
             . 'LASTNAME needs to be longer than 3 letters'
             . '- to get a message with more info change this message location near LastnameCheck in class Person and replace it with $e<br><br>';
+        } catch (PersonSecLvl $e) {
+          echo 'securyLvl per una persona: <br>'
+          . 'non sei nessuno non vali niente ti meriti un securyLvl di 0';
         }
+      ?>
+    </div>
 
+    <div class="employee">
+      <?php
         try {
           $employeeCheck = new Employee(
-            '(eC)name',
+            'eName',
             '(eC)lastname',
             '(eC)dateOfBirth',
-            '(eC)securyLvl',
+            6,
             11000,
             '(eC)mainTask',
             '(eC)idCode',
             '(eC)dateOfHiring'
           );
-          echo 'Prova Ral di Employee:<br>' . $employeeCheck . '<br><br>';
+          echo 'Prova di Employee:<br>' . $employeeCheck . '<br><br>';
         } catch (RalCheck $e) {
-            echo 'Prova Ral di Employee:<br>' . 'Ral needs to be between 10.000 and 100.000<br><br>';
+            echo 'Prova Ral di Employee:<br>'
+                . 'Ral needs to be between 10.000 and 100.000<br><br>';
+        } catch (EmployeeSecLvl $e) {
+            echo 'Prova security di Employee:<br>'
+                . 'tra 1 e 5 solamente<br><br>';
+        } catch (NameCheck $e) {
+          echo 'Prova lunghezza lettere nome cognome in un esempio di class employee:<br>'
+            . 'NAME needs to be longer than 3 letters'
+            . '- to get a message with more info change this message location near NameCheck in class Person and replace it with $e<br><br>';
+        } catch (LastnameCheck $e) {
+          echo 'Prova lunghezza lettere nome cognome in un esempio di class employee :<br>'
+            . 'LASTNAME needs to be longer than 3 letters'
+            . '- to get a message with more info change this message location near LastnameCheck in class Person and replace it with $e<br><br>';
         }
 
+      ?>
+    </div>
 
+    <div class="boss">
+      <?php
         try {
 
           $bossCheck = new Boss(
-            'Donald',
-            'Trump',
+            'DonaldBigBoss',
+            'Trsdss',
             '(bC)dateOfBirth',
-            8,
-            50000,
+            11,
+            100000,
             'president',
             '(bC)idCode',
             'something-something-2016',
@@ -312,14 +370,29 @@
               $employeeCheck
             ]
           );
-          echo 'prova array boss:<br>' . $bossCheck;
+          echo 'prova boss:<br>' . $bossCheck;
 
         } catch (BossEmpCheck $e) {
-            echo 'prova array boss:<br>' . 'Non ci sono dipendenti, capo de chè?!';
+          echo 'prova array boss:<br>' . 'Non ci sono dipendenti, capo de chè?!';
+        } catch (BossSecLvl $e) {
+          echo 'Prova security di boss:<br>' . 'tra 6 e 10 solamente<br><br>';
+        } catch (NameCheck $e) {
+          echo 'Prova lunghezza lettere nome cognome in un esempio di class boss :<br>'
+            . 'NAME needs to be longer than 3 letters'
+            . '- to get a message with more info change this message location near NameCheck in class Boss and replace it with $e<br><br>';
+        } catch (LastnameCheck $e) {
+          echo 'Prova lunghezza lettere nome cognome in un esempio di class Boss :<br>'
+            . 'LASTNAME needs to be longer than 3 letters'
+            . '- to get a message with more info change this message location near LastnameCheck in class Person and replace it with $e<br><br>';
+        } catch (RalCheck $e) {
+            echo 'Prova Ral di boss:<br>'
+                . 'Ral needs to be between 10.000 and 100.000<br><br>';
         }
 
       ?>
-    </h4>
+    </div>
+
+
 
 
 
