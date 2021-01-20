@@ -107,12 +107,12 @@
             $this -> setDateOfHiring($dateOfHiring);
           }
 
-          // public function getSecuryLvl() {
-          //   return $this -> securyLvl;
-          // }
+          public function getSecuryLvl() {
+            return $this -> securyLvl;
+          }
           public function setSecuryLvl($securyLvl) {
             if ($securyLvl < 1 || $securyLvl > 5) {
-              throw = new EmployeeSecLvl;
+              throw new EmployeeSecLvl;
             }
 
             $this -> securyLvl = $securyLvl;
@@ -171,13 +171,13 @@
             $this -> setEmployees($employees);
           }
 
-          // public function getSecuryLvl() {
-          //   return $this -> securyLvl;
-          // }
+          public function getSecuryLvl() {
+            return $this -> securyLvl;
+          }
 
           public function setSecuryLvl($securyLvl) {
             if ($securyLvl < 6 || $securyLvl > 10) {
-              throw = new BossSecLvl;
+              throw new BossSecLvl;
             }
             $this -> securyLvl = $securyLvl;
           }
