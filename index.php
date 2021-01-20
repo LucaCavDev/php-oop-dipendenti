@@ -217,7 +217,7 @@
 
         echo 'persona:<br>' . $persona . '<br><br>'
           . 'dipendente:<br>' . $dipendente . '<br><br>'
-          . 'boss:<br>' . $boss. '<br><br>';
+          . 'boss:<br>' . $boss . '<br><br>';
 
       ?>
     </h2>

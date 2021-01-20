@@ -1,0 +1,16 @@
+body {
+  background-color: red;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow: auto;
+  /* flex-direction: column; */
+  /* flex-wrap: wrap; */
+
+}
+
+.container {
+  font-size: 20px;
+}
