@@ -76,9 +76,9 @@
             return $this -> securyLvl;
           }
           public function setSecuryLvl($securyLvl) {
-            if ($securyLvl != 0) {
-              throw new PersonSecLvl;
-            }
+            // if ($securyLvl != 0) {
+            //   throw new PersonSecLvl;
+            // }
 
             $this -> securyLvl = $securyLvl;
           }
@@ -107,12 +107,12 @@
             $this -> setDateOfHiring($dateOfHiring);
           }
 
-          public function getSecuryLvl() {
-            return $this -> securyLvl;
-          }
+          // public function getSecuryLvl() {
+          //   return $this -> securyLvl;
+          // }
           public function setSecuryLvl($securyLvl) {
             if ($securyLvl < 1 || $securyLvl > 5) {
-              $throw = new EmployeeSecLvl;
+              throw = new EmployeeSecLvl;
             }
 
             $this -> securyLvl = $securyLvl;
@@ -171,13 +171,13 @@
             $this -> setEmployees($employees);
           }
 
-          public function getSecuryLvl() {
-            return $this -> securyLvl;
-          }
+          // public function getSecuryLvl() {
+          //   return $this -> securyLvl;
+          // }
 
           public function setSecuryLvl($securyLvl) {
             if ($securyLvl < 6 || $securyLvl > 10) {
-              $throw = new BossSecLvl;
+              throw = new BossSecLvl;
             }
             $this -> securyLvl = $securyLvl;
           }
@@ -281,7 +281,7 @@
         class NameCheck extends Exception {};
         class LastnameCheck extends Exception {};
         class RalCheck extends Exception {};
-        class PersonSecLvl extends Exception {};
+        // class PersonSecLvl extends Exception {};
         class EmployeeSecLvl extends Exception {};
         class BossSecLvl extends Exception {};
         class BossEmpCheck extends Exception {};
@@ -309,10 +309,11 @@
           echo 'Prova lunghezza lettere nome cognome in un esempio di class Person :<br>'
             . 'LASTNAME needs to be longer than 3 letters'
             . '- to get a message with more info change this message location near LastnameCheck in class Person and replace it with $e<br><br>';
-        } catch (PersonSecLvl $e) {
-          echo 'securyLvl per una persona: <br>'
-          . 'non sei nessuno non vali niente ti meriti un securyLvl di 0';
         }
+        // catch (PersonSecLvl $e) {
+        //   echo 'securyLvl per una persona: <br>'
+        //   . 'non sei nessuno non vali niente ti meriti un securyLvl di 0';
+        // }
       ?>
     </div>
 
@@ -323,7 +324,7 @@
             'eName',
             '(eC)lastname',
             '(eC)dateOfBirth',
-            6,
+            4,
             11000,
             '(eC)mainTask',
             '(eC)idCode',
@@ -357,7 +358,7 @@
             'DonaldBigBoss',
             'Trsdss',
             '(bC)dateOfBirth',
-            11,
+            8,
             100000,
             'president',
             '(bC)idCode',
