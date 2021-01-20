@@ -106,9 +106,9 @@
             return $this -> $ral;
           }
           public function setRal($ral) {
-            // if ($ral <= 10000 || $ral >= 100000) {
-            //   throw new RalCheck;
-            // }
+            if ($ral <= 10000 || $ral >= 100000) {
+              throw new RalCheck;
+            }
 
             $this-> ral = $ral;
           }
@@ -200,45 +200,45 @@
         }
 
 //-----------------------------------------------------------------------------
-        $p1 = new Person(
-          '(p)name',
-          '(p)lastname',
-          '(p)dateOfBirth',
-          '(p)securyLvl',
-        );
+        // $p1 = new Person(
+        //   '(p)name',
+        //   '(p)lastname',
+        //   '(p)dateOfBirth',
+        //   '(p)securyLvl',
+        // );
         // echo 'p1:<br>' . $p1 . '<br><br>';
 
-        $e1 = new Employee(
-          '(e)name',
-          '(e)lastname',
-          '(e)dateOfBirth',
-          '(e)securyLvl',
-          '(e)ral',
-          '(e)mainTask',
-          '(e)idCode',
-          '(e)dateOfHiring',
-        );
+        // $e1 = new Employee(
+        //   '(e)name',
+        //   '(e)lastname',
+        //   '(e)dateOfBirth',
+        //   '(e)securyLvl',
+        //   '(e)ral',
+        //   '(e)mainTask',
+        //   '(e)idCode',
+        //   '(e)dateOfHiring',
+        // );
         // echo 'e1:<br>' . $e1 . '<br><br>';
 
-        $b1 = new Boss(
-          '(b)name',
-          '(b)lastname',
-          '(b)dateOfBirth',
-          '(b)securyLvl',
-          '(b)ral',
-          '(b)mainTask',
-          '(b)idCode',
-          '(b)dateOfHiring',
-          '(b)profit',
-          '(b)vacancy',
-          '(b)sector',
-          [
-            $e1,
-            $e1,
-            $e1,
-            $e1,
-          ]
-        );
+        // $b1 = new Boss(
+        //   '(b)name',
+        //   '(b)lastname',
+        //   '(b)dateOfBirth',
+        //   '(b)securyLvl',
+        //   '(b)ral',
+        //   '(b)mainTask',
+        //   '(b)idCode',
+        //   '(b)dateOfHiring',
+        //   '(b)profit',
+        //   '(b)vacancy',
+        //   '(b)sector',
+        //   [
+        //     $e1,
+        //     $e1,
+        //     $e1,
+        //     $e1,
+        //   ]
+        // );
 
         // $e1-> setName('peiro');
         // echo 'b1:<br>' . $b1 . '<br><br>';
@@ -252,13 +252,8 @@
         //https://stackify.com/php-try-catch-php-exception-tutorial/ spiegazione class extends per exception
         class NameCheck extends Exception {};
         class LastnameCheck extends Exception {};
-        // class RalCheck extends Exception {};
+        class RalCheck extends Exception {};
         class BossEmpCheck extends Exception {};
-
-
-
-
-
 
 
         try {
@@ -281,23 +276,21 @@
             . '- to get a message with more info change this message location near LastnameCheck in class Person and replace it with $e<br><br>';
         }
 
-        // try {
-        //   $employeeCheck = new Employee(
-        //     'Aioooo',
-        //     'AUUUUUUUu',
-        //     '23-11-1467',
-        //     3,
-        //     11130,
-        //     'bring coffee',
-        //     '123stella',
-        //     '12-05-2016'
-        //   );
-        //   echo 'Prova Ral in un esempio di class Employee:<br>'
-        //     . $employeeCheck;
-        // } catch (RalCheck $e) {
-        //   echo 'Prova Ral in un esempio di class Employee:<br>'
-        //     . 'Ral needs to be between 10.000 and 100.000';
-        // }
+        try {
+          $employeeCheck = new Employee(
+            '(eC)name',
+            '(eC)lastname',
+            '(eC)dateOfBirth',
+            '(eC)securyLvl',
+            11000,
+            '(eC)mainTask',
+            '(eC)idCode',
+            '(eC)dateOfHiring'
+          );
+          echo 'Prova Ral di Employee:<br>' . $employeeCheck . '<br><br>';
+        } catch (RalCheck $e) {
+            echo 'Prova Ral di Employee:<br>' . 'Ral needs to be between 10.000 and 100.000<br><br>';
+        }
 
 
         try {
@@ -305,19 +298,18 @@
           $bossCheck = new Boss(
             'Donald',
             'Trump',
-            '(b)dateOfBirth',
+            '(bC)dateOfBirth',
             8,
             50000,
             'president',
-            '(b)idCode',
+            '(bC)idCode',
             'something-something-2016',
-            '(b)profit',
-            '(b)vacancy',
-            '(b)sector',
+            '(bC)profit',
+            '(bC)vacancy',
+            '(bC)sector',
             [
-              $e1,
-              $e1
-
+              $employeeCheck,
+              $employeeCheck
             ]
           );
           echo 'prova array boss:<br>' . $bossCheck;
